@@ -36,6 +36,7 @@ func (client *KoalaClient)Init(){
 	var sign H5Signer = H5Signer{}
 	client.signer = sign
 
+	//抓包调试使用
 	proxy := func(r *http.Request) (*url.URL, error) {
 		return url.Parse("http://127.0.0.1:8888")
 	}
@@ -293,6 +294,7 @@ func (client *KoalaClient) doRequest(requestUrl string,head UrlParams,body BodyP
 	fmt.Println(string(bodyData))
 	buf := strings.NewReader(string(bodyData))
 	//buf := bytes.NewReader(bodyData)
+	//POST必须大写
 	req,err := http.NewRequest("POST",requestUrl,buf)
 	if err != nil {
 		return nil,err
